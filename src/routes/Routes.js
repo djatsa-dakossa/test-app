@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginForm from '../screens/loginView/LoginForm';
 import RegisterForm from '../screens/registerView/RegisterView';
 import Home from '../screens/home/Home';
+import Start from '../screens/start/start/Start';
 
 
 
@@ -14,37 +15,36 @@ const routes = [
         name: 'Login',
         component: LoginForm,
         options: {title: "Login",
-            headerStyle: {
-                backgroundColor: '#ef9b0f',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-                fontWeight: 'bold',
-            },}
+            headerShown: false
+        }
     },
     {
         name: 'Register',
         component: RegisterForm,
         options: {title: "Register",
-            headerStyle: {
-                backgroundColor: '#ef9b0f',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-                fontWeight: 'bold',
-            },}
+            headerShown: false
+        }
     },
     {
         name: 'Home',
         component: Home,
         options: {title: "Home",
+            headerShown: false
+        }
+    },
+    {
+        name: 'Start',
+        component: Start,
+        options: {title: "Welcome",
             headerStyle: {
                 backgroundColor: '#ef9b0f',
             },
             headerTintColor: '#fff',
             headerTitleStyle: {
                 fontWeight: 'bold',
-            },}
+            },
+            headerShown: false
+        }
     }
 ]
 
@@ -54,10 +54,9 @@ const Routes = () => {
 
 
     return(
-            <Stack.Navigator initialRouteName={"Login"} >
+            <Stack.Navigator initialRouteName={"Start"} >
                 
                 {
-
                     routes.map(route => {
                         const name = route.name;
                         const Component = route.component; 

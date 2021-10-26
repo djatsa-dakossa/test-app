@@ -1,15 +1,19 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 // @ts-ignore
-import { View, StyleSheet, Text, Image, TextInput, Dimensions, Button, TouchableHighlight, ScrollView, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, Text, Image, TextInput, Dimensions, Button, TouchableHighlight, ScrollView, ActivityIndicator, ImageBackground } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import Snackbar from 'react-native-snackbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginEffect } from '../../store/effects/AccountEffects';
 import { ApplicationState } from '../../types/types';
+import {styles} from './components/styles/styles'
+import Input from 'react-native-input-style';
 
+
+const bgImage = require("../../components/assets/bg2.png")
 
 export default function LoginForm({navigation}) {
-    let ScreenHeight = Dimensions.get("window").height;
     const {loading: {
         login_loading,
         login_failed,
@@ -51,109 +55,65 @@ export default function LoginForm({navigation}) {
     }, [login_failed])
 
     return(
-        <ScrollView>
-        <View style={{backgroundColor: '#000', height: ScreenHeight, overflow: 'hidden', position: 'relative'}}>
+        <View style={styles.alwaysred}>
+            <ImageBackground source={bgImage} resizeMode="cover" style={styles.image}>
+            <LinearGradient colors={[ "#fe6161cc", "#FF7955", "#d2307833" ]} style={styles.bg}>
+                <Text style={{color: "#fff", marginTop: 50}} >Sign in</Text>                
+                <View style={styles.formContainer}>
 
-            <View style={styles.decoration}>
+                    <Text style={styles.pageTitle}>Sign in</Text>
+                    <Input
+                        id='email'
+                        labelStyle={{display: 'none'}}
+                        required
+                        placeholder="Email"
+                        style={styles.inputText}
+                        contain={email}
+                        label=""
+                        email={true}
+                        borderColor="#F4327F"
+                        onInputChange={changeEmail}
+                    />
+                    <Input
+                        id='password'
+                        labelStyle={{display: 'none'}}
+                        required
+                        placeholder="Password"
+                        style={styles.inputText}
+                        contain={password}
+                        borderColor="#F4327F"
+                        onInputChange={changePassword}
+                        secureTextEntry={true}
+                    />
+                    <View>
 
-            </View>
-            
-            <View style={styles.formContainer}>
-
-                <Text style={styles.pageTitle}>Login in to your acount</Text>
-                <TextInput
-                    placeholder="Email"
-                    style={styles.inputText}
-                    value={email}
-                    onChangeText={changeEmail}
-                />
-                <TextInput
-                    placeholder="Password"
-                    style={styles.inputText}
-                    value={password}
-                    onChangeText={changePassword}
-                    secureTextEntry={true}
-                />
-                <View>
-                    <TouchableHighlight
-                        style ={styles.button}
-                        
-                    >
-                        <Button disabled={false} onPress={handleSubmit} color='#ef9b0f' title='Log in'  />
-                    </TouchableHighlight>
-                    <View style={{ position: 'absolute', top:"50%",right: 0, left: 0 }}>
-                        <ActivityIndicator animating={login_loading} color="red" />
-                    </View> 
+                        <TouchableHighlight
+                            style ={styles.button}
+                            onPress={handleSubmit}
+                            
+                        >
+                            <LinearGradient colors={[ "#d23078", "#fe6161", "#FF7955" ]} style={styles.bg}>
+                                <Text style={styles.buttonText1} >Login</Text>
+                            </LinearGradient>
+                        </TouchableHighlight>
+                        <View style={{ position: 'absolute', top:"50%",right: 0, left: 0 }}>
+                            <ActivityIndicator animating={login_loading} color="red" />
+                        </View> 
+                    </View>
                 </View>
-                <Text style={{color: 'white', marginTop: 16, textAlign: 'center'}}>Don't have an account?</Text>
-                <Text 
-                    onPress={handleChangeView}
-                 style={{color: '#ef9b0f', marginBottom: 3, textAlign: 'center', }}>Create an account</Text>
-            </View>
+                <View style={{alignSelf: 'stretch', padding: 16, }}>
+
+                    <View style={styles.signupBlock}>
+                        <Text style={{color: 'white'}}><Text>Not a user ?</Text>
+                            <Text 
+                                onPress={handleChangeView}
+                            style={{color: '#fff044', borderBottomWidth: 1, borderBottomColor: "rgba(255,255,255, 0.25)"}}> Sign up</Text>
+                        </Text>
+                    </View>
+                </View>
+        </LinearGradient>
+            </ImageBackground>
         </View>
-        </ScrollView>
     )
 }
 
-
-const styles = StyleSheet.create({
-    topBar: {
-        backgroundColor: "#ef9b0f",
-        alignSelf: 'stretch',
-        height: 52,
-        flexDirection: 'row', // row
-        alignItems: 'center',
-        justifyContent: 'space-between', // center, space-around
-        paddingLeft: 10,
-        paddingRight: 10,
-        color: "#000",
-        overflow: 'hidden'
-    },
-    titleText: {
-        color: "#fff"
-    },
-    inputText: {
-        width: 'auto',
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-        marginTop: 10,
-        marginBottom: 10,
-        borderRadius: 8,
-        backgroundColor: '#fff',
-        paddingLeft: 16,
-        paddingRight: 16,
-    },
-    formContainer: {
-        textAlign: 'center',
-        padding: 16,
-        height: 'auto',
-        margin: 'auto',
-        backgroundColor: 'transparent',
-        zIndex: 5
-    },
-    button: {
-        borderRadius: 8,
-        height: 'auto',
-        marginTop :20,
-        overflow: 'hidden'
-    },
-    pageTitle: {
-        fontSize: 20,
-        color: "white",
-        marginTop: 150,
-        marginBottom: 16,
-        textAlign: 'center'
-    },
-    decoration: {
-        width: 400,
-        height: 400,
-        backgroundColor: "#ef9b0f",
-        borderRadius: 200,
-        position: 'absolute',
-        top: -190,
-        left: '-50%',
-        color: '#000',
-        transform: [{translateX: 80}]
-    }
-})

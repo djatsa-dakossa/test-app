@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
 // @ts-ignore
-import { View, StyleSheet, Text, Image, TextInput, Dimensions, Button, TouchableHighlight, SafeAreaView, ScrollView, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, Text, Dimensions, Button, TouchableHighlight, SafeAreaView, ScrollView, ActivityIndicator, ImageBackground } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import Snackbar from 'react-native-snackbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerEffect } from '../../store/effects/AccountEffects';
 import { ApplicationState } from '../../types/types';
+import {styles} from '../loginView/components/styles/styles';
+import Input from 'react-native-input-style';
 
+
+const bgImage = require("../../components/assets/bg2.png")
 
 export default function RegisterForm({navigation}) {
     let ScreenHeight = Dimensions.get("window").height;
@@ -58,122 +63,75 @@ export default function RegisterForm({navigation}) {
     }, [signup_loading, signup_success, signup_failed])
     
     return(
-        <SafeAreaView>
             <ScrollView>
-                <View style={{backgroundColor: '#000', height: ScreenHeight, overflow: 'hidden', position: 'relative'}}>
-
-                    <View style={styles.decoration}>
-
-                    </View>
-                    
+        <View style={{backgroundColor: '#000', minHeight: ScreenHeight}}>
+            <ImageBackground source={bgImage} resizeMode="cover" style={styles.image}>
+                <LinearGradient colors={[ "#fe6161cc", "#FF7955", "#d2307833" ]} style={styles.bg}>
                     <View style={styles.formContainer}>
 
-                        <Text style={styles.pageTitle}>Enter your informations to create your account</Text>
-                        <TextInput
+                        <Text style={styles.pageTitle}>Join us</Text>
+                        <Input
                             placeholder="First Name"
                             value={firstName}
-                            onChangeText={changeFirstName}
+                            borderColor="#F4327F"
+                            labelStyle={{display: 'none'}}
+                            onInputChange={changeFirstName}
                             style={styles.inputText}
                         />
-                        <TextInput
+                        <Input
                             placeholder="Last Name"
                             value={lastName}
-                            onChangeText={changeLastName}
+                            borderColor="#F4327F"
+                            labelStyle={{display: 'none'}}
+                            onInputChange={changeLastName}
                             style={styles.inputText}
                         />
-                        <TextInput
+                        <Input
                             placeholder="Email"
                             value={email}
-                            onChangeText={changeEmail}
+                            onInputChange={changeEmail}
                             style={styles.inputText}
+                            borderColor="#F4327F"
+                            labelStyle={{display: 'none'}}
                         />
-                        <TextInput
+                        <Input
                             placeholder="Password"
                             style={styles.inputText}
                             value={password}
-                            onChangeText={changePassword}
+                            borderColor="#F4327F"
+                            labelStyle={{display: 'none'}}
+                            onInputChange={changePassword}
                             secureTextEntry={true}
                         />
                         <View>
 
                             <TouchableHighlight
                                 style ={styles.button}
-                               
+                                onPress={handleSubmit} disabled={signup_loading}
                             >
-                                <Button  onPress={handleSubmit} disabled={signup_loading} color='#ef9b0f' title='Createe account' />
+                                <LinearGradient colors={[ "#d23078", "#fe6161", "#FF7955" ]} style={styles.bg}>
+                                    <Text style={styles.buttonText1} >Sign up</Text>
+                                </LinearGradient>
                                 {/* <ActivityIndicator/> */}
                             </TouchableHighlight>
                             <View style={{ position: 'absolute', top:"50%",right: 0, left: 0 }}>
                                 <ActivityIndicator animating={signup_loading} color="red" />
                             </View> 
                         </View>
-                        <Text style={{color: 'white', marginTop: 16, textAlign: 'center'}}>Already have an account?</Text>
-                        <Text onPress={() => navigation.navigate('Login', { name: 'Login view' })} style={{color: '#ef9b0f', marginBottom: 3, textAlign: 'center', }}>Log in</Text>
+                    </View>
+                    <View style={{alignSelf: 'stretch', padding: 16, paddingBottom: 100}}>
+
+                    <View style={styles.signupBlock}>
+                        <Text style={{color: 'white'}}><Text>Already have an account ?</Text>
+                            <Text 
+                                onPress={handleChangeView}
+                            style={{color: '#fff044', borderBottomWidth: 1, borderBottomColor: "rgba(255,255,255, 0.25)"}}> Sign in</Text>
+                        </Text>
                     </View>
                 </View>
+                </LinearGradient>
+            </ImageBackground>
+        </View>
             </ScrollView>
-        </SafeAreaView>
     )
 }
-
-
-const styles = StyleSheet.create({
-    topBar: {
-        backgroundColor: "#ef9b0f",
-        alignSelf: 'stretch',
-        height: 52,
-        flexDirection: 'row', // row
-        alignItems: 'center',
-        justifyContent: 'space-between', // center, space-around
-        paddingLeft: 10,
-        paddingRight: 10,
-        color: "#000",
-        overflow: 'hidden'
-    },
-    titleText: {
-        color: "#fff"
-    },
-    inputText: {
-        width: 'auto',
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-        marginTop: 10,
-        marginBottom: 10,
-        borderRadius: 8,
-        backgroundColor: '#fff',
-        paddingLeft: 16,
-        paddingRight: 16,
-    },
-    formContainer: {
-        textAlign: 'center',
-        padding: 16,
-        height: 'auto',
-        margin: 'auto',
-        backgroundColor: 'transparent',
-        zIndex: 5
-    },
-    button: {
-        borderRadius: 8,
-        height: 'auto',
-        marginTop :20,
-        overflow: 'hidden'
-    },
-    pageTitle: {
-        fontSize: 20,
-        color: "white",
-        marginBottom: 16,
-        textAlign: 'center'
-    },
-    decoration: {
-        width: 400,
-        height: 400,
-        backgroundColor: "#ef9b0f",
-        borderRadius: 200,
-        position: 'absolute',
-        top: -190,
-        left: '-50%',
-        color: '#000',
-        transform: [{translateX: 80}]
-    }
-})
