@@ -41,7 +41,7 @@ export default function RegisterForm({navigation}) {
 
     const handleChangeView = () => {
         console.log(navigation)
-        navigation.navigate('Register', { name: 'Registration view' })
+        navigation.navigate('Home', { name: 'Registration view' })
     }
 
     useEffect(() => {
@@ -107,7 +107,7 @@ export default function RegisterForm({navigation}) {
 
                             <TouchableHighlight
                                 style ={styles.button}
-                                onPress={handleSubmit} disabled={signup_loading}
+                                onPress={handleChangeView} disabled={signup_loading}
                             >
                                 <LinearGradient colors={[ "#d23078", "#fe6161", "#FF7955" ]} style={styles.bg}>
                                     <Text style={styles.buttonText1} >Sign up</Text>

@@ -12,6 +12,8 @@ import Input from 'react-native-input-style';
 
 
 const bgImage = require("../../components/assets/bg2.png")
+const image = require("../../components/assets/logo.png")
+
 
 export default function LoginForm({navigation}) {
     const {loading: {
@@ -58,7 +60,7 @@ export default function LoginForm({navigation}) {
         <View style={styles.alwaysred}>
             <ImageBackground source={bgImage} resizeMode="cover" style={styles.image}>
             <LinearGradient colors={[ "#fe6161cc", "#FF7955", "#d2307833" ]} style={styles.bg}>
-                <Text style={{color: "#fff", marginTop: 50}} >Sign in</Text>                
+                <Image width={40} height={40} style={styles.logo} source={image}/>
                 <View style={styles.formContainer}>
 
                     <Text style={styles.pageTitle}>Sign in</Text>

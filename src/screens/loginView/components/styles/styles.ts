@@ -46,8 +46,9 @@ const styles = StyleSheet.create({
         margin: 'auto',
         backgroundColor: '#F2F2F2',
         zIndex: 5,
-        marginTop: 100,
+        marginTop: 50,
         alignSelf: 'stretch',
+        borderRadius: 20
     },
     button: {
         height: 40,
@@ -56,7 +57,8 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         alignItems: "center",
         marginTop: 16,
-        marginBottom: 16
+        marginBottom: 16,
+
     },
     pageTitle: {
         fontSize: 20,
@@ -83,5 +85,10 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         padding: 12,
         alignItems: 'center',
+    },
+    logo: {
+        height: 70,
+        width: 70,
+        marginTop: 50
     }
 })

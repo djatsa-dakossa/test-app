@@ -5,6 +5,9 @@ import LoginForm from '../screens/loginView/LoginForm';
 import RegisterForm from '../screens/registerView/RegisterView';
 import Home from '../screens/home/Home';
 import Start from '../screens/start/start/Start';
+import Welcome from '../screens/welcome/Welcome';
+import NoteView from '../screens/noteView/NoteView';
+import NotesViews from '../screens/noteViews/NotesView';
 
 
 
@@ -35,14 +38,28 @@ const routes = [
     {
         name: 'Start',
         component: Start,
-        options: {title: "Welcome",
-            headerStyle: {
-                backgroundColor: '#ef9b0f',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-                fontWeight: 'bold',
-            },
+        options: {
+            headerShown: false
+        }
+    },
+    {
+        name: 'Welcome',
+        component: Welcome,
+        options: {
+            headerShown: false
+        }
+    },
+    {
+        name: 'NotesView',
+        component: NotesViews,
+        options: {
+            headerShown: false
+        }
+    },
+    {
+        name: 'NoteView',
+        component: NoteView,
+        options: {
             headerShown: false
         }
     }
@@ -54,7 +71,7 @@ const Routes = () => {
 
 
     return(
-            <Stack.Navigator initialRouteName={"Start"} >
+            <Stack.Navigator initialRouteName={"Home"} >
                 
                 {
                     routes.map(route => {

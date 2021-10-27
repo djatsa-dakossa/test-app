@@ -36,7 +36,6 @@ export default function Start ({navigation}) {
                     <TouchableOpacity
                         style ={styles.buttonOutlined}
                         onPress={() => navigation.navigate('Register')}
-                        
                     >
                     <Text style={styles.buttonText1} >Create an account</Text>
                     </TouchableOpacity>
