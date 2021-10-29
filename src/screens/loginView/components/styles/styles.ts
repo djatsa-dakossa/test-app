@@ -4,7 +4,8 @@ import { StyleSheet } from 'react-native';
 export 
 const styles = StyleSheet.create({
     alwaysred: {
-        flex: 1
+        flex: 1,
+        backgroundColor: "#D23078"
     },
     image: {
         flex: 1,
@@ -27,28 +28,29 @@ const styles = StyleSheet.create({
         color: "#444444"
     },
     inputText: {
-        width: 'auto',
+        width: 'auto', 
         height: 40,
         borderColor: 'gray',
         borderWidth: 1,
         marginTop: 10,
         marginBottom: 10,
-        borderRadius: 8,
-        backgroundColor: '#fff',
-        paddingLeft: 16,
+        backgroundColor: 'transparent',
         paddingRight: 16,
-        fontSize: 10
+        fontSize: 16,
+        borderTopWidth: 0,
+        borderLeftWidth: 0,
+        borderRightWidth: 0,
+        borderBottomWidth: 1,
     },
     formContainer: {
         textAlign: 'center',
-        padding: 16,
+        padding: 20,
         height: 'auto',
-        margin: 'auto',
         backgroundColor: '#F2F2F2',
         zIndex: 5,
-        marginTop: 50,
         alignSelf: 'stretch',
-        borderRadius: 20
+        borderRadius: 20,
+        margin: 20
     },
     button: {
         height: 40,

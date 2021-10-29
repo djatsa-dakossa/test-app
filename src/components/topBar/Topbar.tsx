@@ -14,9 +14,10 @@ export default function TopBar ({navigation}) {
             <TouchableHighlight
                 onPress={() => navigation.goBack()}
                 underlayColor={'transparent'}
+                style={styles.backButton}
                 
             >
-                <Icon tvParallaxProperties="" size={40} color="#fff" name="chevron-left"/>
+                <Icon tvParallaxProperties="" size={40} color="#D23078" name="chevron-left"/>
 
             </TouchableHighlight>
         </View>

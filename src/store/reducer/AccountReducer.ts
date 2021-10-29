@@ -1,16 +1,13 @@
 import produce from 'immer';
-import RNSecureStorage, { ACCESSIBLE } from 'rn-secure-storage'
+import { storeData } from '../../components/utils/storage';
+
 import { ApplicationAction } from '../../types/types';
 import { AccountState, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS } from '../types/AccountTypes';
 
-const ls = RNSecureStorage
 
 
 const initialState: AccountState = {
-    access_token: '',
-    refresh_token: '',
-    expires_in: '',
-    token_type: '',
+    token: '',
     user: undefined,
     loading: {
         login_failed: false,
@@ -31,23 +28,20 @@ const reducer = (state = initialState, action: ApplicationAction) => {
             return produce(state, (draft) => {
                 // Ensure we clear current session
                 draft.user = undefined;
-                draft.access_token = '';
+                draft.token = '';
                 draft.loading.login_loading = true;
                 draft.loading.login_failed = false;
                 draft.loading.login_failed_message = '';
             });
         }
         case LOGIN_SUCCESS: {
-            const { user, access_token, refresh_token, token_type } = action;
-            ls.set('access_token', access_token, {accessible: ACCESSIBLE.WHEN_UNLOCKED});
-            ls.set('refresh_token', refresh_token, {accessible: ACCESSIBLE.WHEN_UNLOCKED});
-            ls.set('token_type', token_type, {accessible: ACCESSIBLE.WHEN_UNLOCKED});
-            ls.set('user', JSON.stringify(user), {accessible: ACCESSIBLE.WHEN_UNLOCKED});
+            const { user, token } = action;
+            storeData('token', token);
+            storeData('user', user);
+
             return produce(state, (draft) => {
               draft.user = user;
-              draft.access_token = access_token;
-              draft.refresh_token = refresh_token;
-              draft.token_type = token_type;
+              draft.token = token;
               draft.loading.login_failed = false;
             });
         }

@@ -17,7 +17,8 @@ export  const styles = StyleSheet.create({
     filterContainer: {
         alignItems: 'center',
         justifyContent:  'center',
-        flex: 1
+        flex: 1,
+        marginTop: 0
     }, 
     welcome: {
         color: '#fff',
@@ -42,7 +43,7 @@ export  const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         paddingLeft: 16,
         paddingRight: 16,
-        fontSize: 10,
+        fontSize: 16,
         borderBottomWidth: 0,
         flexGrow: 1,
         alignSelf: 'stretch',

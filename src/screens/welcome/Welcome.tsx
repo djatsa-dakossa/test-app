@@ -30,6 +30,7 @@ export default function Welcome ({navigation}) {
                     <TouchableHighlight
                         onPress={redirect}
                         style ={styles.button}
+                        underlayColor={'transparent'}
                     >
                         <View style={styles.buttonContent}>
 

@@ -1,6 +1,6 @@
 import React, {lazy} from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoginForm from '../screens/loginView/LoginForm';
 import RegisterForm from '../screens/registerView/RegisterView';
 import Home from '../screens/home/Home';
@@ -8,6 +8,7 @@ import Start from '../screens/start/start/Start';
 import Welcome from '../screens/welcome/Welcome';
 import NoteView from '../screens/noteView/NoteView';
 import NotesViews from '../screens/noteViews/NotesView';
+import { useSelector } from 'react-redux';
 
 
 
@@ -53,7 +54,7 @@ const routes = [
         name: 'NotesView',
         component: NotesViews,
         options: {
-            headerShown: false
+            headerShown: false 
         }
     },
     {
@@ -68,10 +69,12 @@ const routes = [
 
 const Routes = () => {
 
+    const {user, token} = useSelector((state) => state.account)
 
+    const auth = user && token
 
     return(
-            <Stack.Navigator initialRouteName={"Home"} >
+            <Stack.Navigator initialRouteName={auth ? "Home" : "Welcome"} >
                 
                 {
                     routes.map(route => {

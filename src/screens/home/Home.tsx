@@ -8,6 +8,7 @@ import { styles } from './components/styles/styles';
 import NoteBookCard from './components/notebookCard/NoteBookCard';
 import AddNoteBook from './components/addNoteBook/AddNoteBook';
 import { Icon } from 'react-native-elements/dist/icons/Icon';
+import TopBar from '../../components/topBar/Topbar';
 
 
 
@@ -27,11 +28,12 @@ export default function Home ({navigation}) {
     return(
         <ScrollView>
             <View>
+                <TopBar navigation={navigation}/>
                 <View style={styles.alwaysred}>
                     <View style={styles.imageBg}>
                         <View style={styles.filterContainer}>
-                            <Text>Hello David </Text>
-                            <Text style={styles.welcome} >Welcome back, </Text>
+                            <Text>Hello {user.fullName} </Text>
+                            <Text style={styles.welcome} >Welcome back </Text>
                             <View style={styles.searchBlock}>
                                 <TextInput
                                     placeholder="Search ..."

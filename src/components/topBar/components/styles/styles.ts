@@ -26,4 +26,9 @@ export  const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold'
     },
+    backButton: {
+        backgroundColor: "#fff",
+        borderRadius: 8,
+        color:"#D23078"
+    }
 })

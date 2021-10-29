@@ -2,7 +2,7 @@
 
 export const URLS = {
     AUTH: {
-        LOGIN: "/account/login",
-        REGISTER: "/account/register",
+        LOGIN: "/auth/sign_in",
+        REGISTER: "/auth/register",
     }
 }

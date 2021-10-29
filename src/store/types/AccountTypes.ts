@@ -21,17 +21,13 @@ export interface LoadingAccount {
 }
 
 export interface User {
-    first_name: string;
-    last_name: string;
+    fullName: string;
     email: string;
 }
 
 export interface AccountState {
     loading: LoadingAccount,
-    access_token: string,
-    refresh_token: string,
-    expires_in: string,
-    token_type: string,
+    token: string,
     user: User | null;
 }
 
@@ -42,9 +38,7 @@ export interface LoginRequest extends Action {
   
 export interface LoginSuccess extends Action {
     type: typeof LOGIN_SUCCESS;
-    access_token: string;
-    refresh_token: string;
-    token_type: string;
+    token: string;
     user: User | null | undefined;
 }
 

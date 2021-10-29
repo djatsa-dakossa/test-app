@@ -7,12 +7,10 @@ export const loginRequest = (): LoginRequest => ({
     type: LOGIN_REQUEST
   });
   
-  export const loginSuccess = (user: User, access_token: string, refresh_token: string, token_type: string): LoginSuccess => ({
+  export const loginSuccess = (user: User, token: string): LoginSuccess => ({
     type: LOGIN_SUCCESS,
     user,
-    access_token,
-    refresh_token,
-    token_type
+    token,
   });
   
   export const loginError = (message: string): LoginError => ({
