@@ -17,7 +17,7 @@ const image = require("../../components/assets/logo.png")
 export default function LoginForm({navigation}) {
     const {loading: {
         login_loading,
-        login_failed,
+        login_failed, 
         login_failed_message,
     }} = useSelector((state: ApplicationState) => state.account)
 
@@ -80,7 +80,7 @@ export default function LoginForm({navigation}) {
                         <TouchableHighlight
                             style ={styles.button}
                             onPress={handleSubmit}
-                            disabled={login_loading}
+                            disabled={false}
                         >
                             <LinearGradient colors={[ "#d23078", "#fe6161", "#d23078" ]} style={styles.bg}>
                                 <Text style={styles.buttonText1} >Login</Text>

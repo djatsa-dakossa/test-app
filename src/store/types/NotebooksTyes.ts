@@ -1,4 +1,5 @@
 import { Action } from "redux";
+import { LoadingNotes } from "./NoteType";
 
 export const CREATE_NOTEBOOK_REQUEST = 'CREATE_NOTEBOOK_REQUEST';
 export const CREATE_NOTEBOOK_SUCCESS = 'CREATE_NOTEBOOK_SUCCESS';
@@ -16,6 +17,10 @@ export const LOAD_NOTEBOOKS_REQUEST = 'LOAD_NOTEBOOKS_REQUEST';
 export const LOAD_NOTEBOOKS_SUCCESS = 'LOAD_NOTEBOOKS_SUCCESS';
 export const LOAD_NOTEBOOKS_FAILURE = 'LOAD_NOTEBOOKS_FAILURE';
 
+
+export const LOAD_A_NOTEBOOK_REQUEST = 'LOAD_A_NOTEBOOK_REQUEST';
+export const LOAD_A_NOTEBOOK_SUCCESS = 'LOAD_A_NOTEBOOK_SUCCESS';
+export const LOAD_A_NOTEBOOK_FAILURE = 'LOAD_A_NOTEBOOK_FAILURE';
 
 export interface LoadingNotebooks {
     create_notebook_loading: boolean;
@@ -35,6 +40,10 @@ export interface LoadingNotebooks {
     load_notebook_success: boolean;
     load_notebook_success_message: string;
     load_notebook_failed_message: string;
+    load_a_notebook_loading: boolean;
+    load_a_notebook_failed: boolean;
+    load_a_notebook_success: boolean;
+    load_a_notebook_failed_message: string;
 }
 
 export interface User {
@@ -44,14 +53,27 @@ export interface User {
 
 export interface NotebooksState {
     loading: LoadingNotebooks,
+    loading_notes: LoadingNotes,
     notebooks: Notebook[],
     notebook: Notebook,
+    note: Note
 }
 
 export interface Notebook {
     _id?: string,
     title: string,
-    description: string;
+    description: string,
+    notes?: number | Note,
+    detail?: Notebook,
+    all_notes?: Note[]
+}
+
+export interface Note {
+    _id?: string,
+    title: string,
+    content: string;
+    created?: Date,
+    updated?: Date,
 }
 
 export interface CreateNotebookRequest extends Action {
@@ -106,10 +128,26 @@ export interface DeleteNotebookRequest extends Action {
   
 export interface DeleteNotebookSuccess extends Action {
     type: typeof DELETE_NOTEBOOK_SUCCESS;
-    message: string
+    message: string,
+    _id: string
 }
 
 export interface DeleteNotebookError extends Action {
     type: typeof DELETE_NOTEBOOK_FAILURE;
+    message: string;
+}
+
+
+export interface LoadANotebookRequest extends Action {
+    type: typeof LOAD_A_NOTEBOOK_REQUEST;
+  }
+  
+export interface LoadANotebookSuccess extends Action {
+    type: typeof LOAD_A_NOTEBOOK_SUCCESS;
+    notebook: Notebook;
+}
+
+export interface LoadANotebookError extends Action {
+    type: typeof LOAD_A_NOTEBOOK_FAILURE;
     message: string;
 }

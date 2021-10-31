@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 export 
 const styles = StyleSheet.create({
     alwaysred: {
-        backgroundColor: '#fff',
+        backgroundColor: '#E5E5E5',
         flex: 1,
         overflow: 'scroll'
     },
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         paddingLeft: 16,
         paddingRight: 16,
-        fontSize: 10,
+        fontSize: 16,
         borderBottomWidth: 0,
         flexGrow: 1,
         alignSelf: 'stretch',
@@ -63,7 +63,8 @@ const styles = StyleSheet.create({
     notebookCardParent: {
         padding: 20,
         marginTop: -70,
-        marginBottom: 40
+        marginBottom: 40,
+        backgroundColor: 'transparent',
     },
     notebookCard: {
         borderRadius: 20,
@@ -91,6 +92,7 @@ const styles = StyleSheet.create({
         color: '#000',
         paddingLeft: 20,
         paddingRight: 20,
+        
     },
     separator: {
         marginTop: 40,
@@ -117,7 +119,7 @@ const styles = StyleSheet.create({
         backgroundColor:"#D23078",
         color:"#fff",
         position: 'absolute',
-        bottom: 0,
+        bottom: 16,
         right: 16,
         height: 50,
         width: 50,
@@ -139,19 +141,26 @@ const styles = StyleSheet.create({
         margin: 20,
         borderRadius: 20,
         justifyContent: 'center',
-        minHeight: "50%",
-        marginTop: 'auto',
-        marginBottom: 'auto',
         overflow: 'scroll',
         paddingBottom: 16,
         paddingTop: 16,
     },
+    // modal: {
+    //     alignItems: 'center',
+    //     justifyContent: 'center',
+    //     position: 'relative',
+    //     overflow: 'scroll',
+    //     // @ts-ignore
+    //     display: 'block'
+    // },
     modal: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'relative'
-    },
+        position:'absolute',
+        top:'10%',
+        left:'10%',
+        overflow:'scroll',
+        height:'100%',
+        // display:'block'
+      },
     textInput1: {
         alignSelf: 'stretch',
         borderBottomWidth: 1,
@@ -187,5 +196,9 @@ const styles = StyleSheet.create({
     dropdownMenu: {
         right: 40,
         left: 100,
+    },
+    mainview: {
+        backgroundColor: "#E5E5E5", 
+        flex: 1
     }
 })

@@ -1,15 +1,28 @@
 import axios from "axios";
+import { getData } from "../../utils/storage";
 
-const host = "http://192.168.8.101:3000"
+const host = "http://192.168.8.100:3003"
 
 const API = axios.create({
     baseURL: host
 })
 
 
+const fetchToken = async () => {
+    const tokenData = await getData('token');
+    console.log("tokenData ==>", tokenData)
+    
+
+    API.defaults.headers.common['Authorization'] = `JWT ${JSON.parse(tokenData)}` 
+} 
+
+fetchToken()
+
+ 
+
 API.interceptors.response.use(
     res => {
-            return res;
+        return res;
     },
     async error => {
         if (error.response) {  

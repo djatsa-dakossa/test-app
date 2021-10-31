@@ -1,7 +1,7 @@
 'use strict';
 import { StyleSheet } from 'react-native';
 
-export  const styles = StyleSheet.create({ 
+export  const styles = StyleSheet.create({
     alwaysred: {
         backgroundColor: '#fff',
         flex: 1,
@@ -115,17 +115,13 @@ export  const styles = StyleSheet.create({
         backgroundColor:"#D23078",
         color:"#fff",
         position: 'absolute',
-        bottom: 16,
+        bottom: 0,
         right: 16,
         height: 50,
         width: 50,
         overflow: 'hidden',
         alignItems: 'center',
         justifyContent: 'center'
-    },
-    mainview: {
-        backgroundColor: "#E5E5E5", 
-        flex: 1
     },
     icon: {
         margin: 0,
@@ -171,7 +167,8 @@ export  const styles = StyleSheet.create({
         borderRadius: 20,
         padding: 16,
         overflow: "hidden",
-        color: "#fff"
+        color: "#fff",
+        backgroundColor: "red"
 
     },
     buttonCancel: {

@@ -3,14 +3,15 @@ import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE,
 } from "../types/AccountTypes";
 
 
-export const loginRequest = (): LoginRequest => ({
+  export const loginRequest = (): LoginRequest => ({
     type: LOGIN_REQUEST
   });
   
-  export const loginSuccess = (user: User, token: string): LoginSuccess => ({
+  export const loginSuccess = (user: User, token: string, save: boolean): LoginSuccess => ({
     type: LOGIN_SUCCESS,
     user,
     token,
+    save
   });
   
   export const loginError = (message: string): LoginError => ({

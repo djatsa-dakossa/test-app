@@ -14,18 +14,15 @@ import {
 } from 'react-native';
 
 import Routes from './src/routes/Routes';
-import Auth from './src/components/auth/Auth';
 
 
 
 const App: () => Node = () => {
 
   return (
-      <Auth>
-        <NavigationContainer fallback={<Text style={{color: '#000'}}>Loading...</Text>}>
-            <Routes/>
-        </NavigationContainer>
-      </Auth>
+      <NavigationContainer fallback={<Text style={{color: '#000'}}>Loading...</Text>}>
+          <Routes/>
+      </NavigationContainer>
   );
 };
 

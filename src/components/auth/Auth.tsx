@@ -18,7 +18,8 @@ export default function Auth ({children}) {
         
         if(userData && tokenData) {
             dispatch(
-                loginSuccess(JSON.parse(userData), tokenData)
+                // @ts-ignore
+                loginSuccess(userData, tokenData, false)
             )
         }
     }

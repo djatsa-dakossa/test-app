@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, TouchableHighlight, View, Text, TouchableOpacity, TextInput, ActivityIndicator } from 'react-native';
+import { Modal, TouchableHighlight, View, Text, TouchableOpacity, TextInput, ActivityIndicator, ScrollView } from 'react-native';
 import Input from 'react-native-input-style';
 import LinearGradient from 'react-native-linear-gradient';
+import { MenuItem } from 'react-native-material-menu';
 import Snackbar from 'react-native-snackbar';
 import { useDispatch, useSelector } from 'react-redux';
-import { createNoteBookEffect } from '../../../../store/effects/NoteBookEffects';
+import { updateNoteBooksEffect } from '../../../../store/effects/NoteBookEffects';
+import { updateNotesEffect } from '../../../../store/effects/NoteEffect';
 import { ApplicationState } from '../../../../types/types';
 import {styles} from '../styles/styles'
 
@@ -13,15 +15,17 @@ import {styles} from '../styles/styles'
 export default function (props: any) {
 
 
+    const {note, notebook_id} = props
     const [open, setOpen] = useState(false)
-    const [title, setTitle] = useState('')
-    const [description, setDescription] = useState("")
+    const [title, setTitle] = useState(note.title)
+    const [content, setContent] = useState(note.content)
 
-    let {loading: {
-        create_notebook_loading,
-        create_notebook_failed,
-        create_notebook_success,
-        create_notebook_failed_message
+
+    let {loading_notes: {
+        update_note_failed,
+        update_note_failed_message,
+        update_note_loading,
+        update_note_success
     }} = useSelector((state: ApplicationState) => state.notebooks)
     
     const handleClose = () => {
@@ -36,7 +40,7 @@ export default function (props: any) {
 
     const handleSubmit = () => {
 
-        if(title.length < 0 || description.length < 0) {
+        if(title.length < 0 || content.length < 0) {
             Snackbar.show({
                 text: "Please, let fill all fields and try again",
                 backgroundColor: 'red',
@@ -45,49 +49,48 @@ export default function (props: any) {
         } else {
             const info = {
                 title: title,
-                description: description
+                content: content
             }
             dispatch(
-                createNoteBookEffect(info, handleClose)
+                updateNotesEffect(note._id, notebook_id,  info, handleClose)
             )
         }
     }
 
     useEffect(() => {
 
-        if(create_notebook_loading) {
+        if(update_note_loading) {
             Snackbar.show({
                 text: "please wait ...",
                 backgroundColor: 'green',
                 duration: Snackbar.LENGTH_SHORT,
             })
         }
-        if(create_notebook_success) {
+        if(update_note_success) {
             Snackbar.show({
-                text: "Notebook succesfully added",
+                text: "Note succesfully updated",
                 backgroundColor: 'green',
                 duration: Snackbar.LENGTH_SHORT,
             })
         }
-        if(create_notebook_failed) {
+        if(update_note_failed) {
             Snackbar.show({
-                text: create_notebook_failed_message,
+                text: update_note_failed_message,
                 backgroundColor: 'red',
                 duration: Snackbar.LENGTH_SHORT,
             })
         }
 
-    }, [create_notebook_failed, create_notebook_success, create_notebook_loading])
+    }, [update_note_failed, update_note_success, update_note_loading])
 
     return(
         <View>
 
-            <TouchableHighlight 
-                underlayColor={'transparent'}
-                onPress={handleOpen}
-                style={styles.fabCreate} >
-                <Text style={{color: "#fff", fontSize: 30}}>+</Text>
-            </TouchableHighlight>
+            <MenuItem onPress={handleOpen} > 
+                <Text>
+                    Edit
+                </Text>
+            </MenuItem>
 
             <Modal
                 animationType="slide"
@@ -98,39 +101,40 @@ export default function (props: any) {
             >
                 <View style={styles.containerModal}>
 
-                    <View>
+
+                    <ScrollView>
                         <TextInput
-                            placeholder="Notebook title"
+                            placeholder="Note title"
                             style={styles.textInput1}
                             value={title}
                             onChangeText={setTitle}
                         />
                         <TextInput
-                            placeholder="Notebook description"
+                            placeholder="Note content"
                             style={styles.textInput1}
-                            value={description}
-                            onChangeText={setDescription}
+                            value={content}
+                            onChangeText={setContent}
                             multiline
                             numberOfLines={4}
                             
                         />
-                    </View>
+                    </ScrollView>
                     <View style={styles.modalFooter}>
                         <TouchableOpacity 
                             onPress={handleClose}
                             style={styles.buttonCancel}
-                            disabled={create_notebook_loading}
+                            disabled={update_note_loading}
                             >
                             <Text style={styles.buttonCancelText}>Close</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
                             onPress={handleSubmit}
                             style={styles.buttonSave}
-                            disabled={create_notebook_loading}
+                            disabled={update_note_loading}
                             >
                                 <LinearGradient colors={[ "#d23078", "#fe6161", "#FF7955" ]} style={{borderRadius: 20}} >
                                     <Text style={styles.buttonSaveText} >save</Text>
-                                    {create_notebook_loading && <ActivityIndicator style={{left: '30%', top: '30%', position:'absolute'}} color="red" />}
+                                    {update_note_loading && <ActivityIndicator style={{left: '30%', top: '30%', position:'absolute'}} color="red" />}
                                 </LinearGradient>
                         </TouchableOpacity>
                     </View>

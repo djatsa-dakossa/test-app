@@ -71,10 +71,12 @@ const Routes = () => {
 
     const {user, token} = useSelector((state) => state.account)
 
-    const auth = user && token
+    const auth = Boolean(user) && Boolean(token)
+
+    console.log('auth ==>', auth)
 
     return(
-            <Stack.Navigator initialRouteName={auth ? "Home" : "Welcome"} >
+            <Stack.Navigator initialRouteName={"Welcome"} >
                 
                 {
                     routes.map(route => {
@@ -88,7 +90,6 @@ const Routes = () => {
                                 name={name}
                                 component={Component}
                                 options={options}
-                                
                             />
                         )
                     })

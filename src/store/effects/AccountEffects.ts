@@ -42,9 +42,11 @@ export const loginEffect = (info: LoginInfo, redirect: Function): Effect => asyn
 
     dispatch(loginRequest())
     API.post(URLS.AUTH.LOGIN, info).then(resp => {
-        const {user, token:access_token, refresh_token, token_type}: any = resp.data;
+        const {user, token:access_token}: any = resp.data;
 
-        dispatch(loginSuccess(user, access_token, refresh_token, token_type))
+        console.log("access_token ===*>", access_token)
+
+        dispatch(loginSuccess(user, access_token, true))
         redirect()
     }).catch(err => {
         dispatch(signUpError(err.data.message))

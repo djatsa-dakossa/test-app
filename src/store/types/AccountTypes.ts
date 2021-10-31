@@ -40,6 +40,7 @@ export interface LoginSuccess extends Action {
     type: typeof LOGIN_SUCCESS;
     token: string;
     user: User | null | undefined;
+    save: boolean
 }
 
 export interface LoginError extends Action {

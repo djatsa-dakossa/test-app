@@ -35,9 +35,12 @@ const reducer = (state = initialState, action: ApplicationAction) => {
             });
         }
         case LOGIN_SUCCESS: {
-            const { user, token } = action;
-            storeData('token', token);
-            storeData('user', user);
+            const { user, token, save } = action;
+
+            if(save) {
+                storeData('token', token);
+                storeData('user', user);
+            }
 
             return produce(state, (draft) => {
               draft.user = user;

@@ -1,38 +1,34 @@
 import React from 'react'
 import { View, Text, TouchableHighlight } from "react-native";
 import { Icon } from 'react-native-elements';
-import { useDispatch } from 'react-redux';
-import { loadANoteBookEffect } from '../../../../store/effects/NoteBookEffects';
 import CustomMenu from '../menu/Menu';
 import {styles} from '../styles/styles'
+import SkeletonContent from 'react-native-skeleton-content';
 
-export default function ({navigation, notebook}) {
 
-    const next = () => {
-        navigation.navigate('NotesView')
-    }
+export default function () {
 
-    const dispatch = useDispatch()
-
-    const handleSelect = (id: string) => {
-
-        dispatch(
-            loadANoteBookEffect(id, next)
-        )
-    }
 
     return(
         <View style={styles.notebookCard}>
-            
-            <CustomMenu notebook={notebook}/>
-            <Text style={styles.notebookCardTitle}>{notebook.title}</Text>
-            <Text style={styles.notebookCardDescription}>{notebook.description}</Text>
+            <SkeletonContent
+                containerStyle={{ flex: 1, width: 300 }}
+                isLoading={true}
+                layout={[
+                    { key: 'someId', width: 220, height: 20, marginBottom: 6 },
+                    { key: 'someOtherId', width: 180, height: 20, marginBottom: 6 }
+                ]}
+                >
+                <Text >Your content</Text>
+                <Text >Other content</Text>
+            </SkeletonContent>
+            <Text style={styles.notebookCardTitle}>{"notebook.title"}</Text>
+            <Text style={styles.notebookCardDescription}>{"notebook.description"}</Text>
             <View style={styles.separator}/>
-            <View style={styles.notebookCardFooter}><Text>{notebook.notes || 0} Notes </Text> 
+            <View style={styles.notebookCardFooter}><Text>{"notebook.notes" || 0} Notes </Text> 
                 <View style={{flexGrow: 1}} />
                 <TouchableHighlight
                     underlayColor={'transparent'}
-                    onPress={() => handleSelect(notebook._id)}
                    
                 >
                     <View style={styles.buttonContent}>
