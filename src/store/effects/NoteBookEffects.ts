@@ -53,12 +53,13 @@ export const loadNoteBooksEffect = (search: string): Effect => async (
         // @ts-ignore
         const data = resp.data.data;
         
-        console.log("notes response", data)
+        console.log("notes response", API.defaults)
 
 
         dispatch(loadNotebooksSuccess(data))
     }).catch(err => {
         dispatch(loadNotebooksFailed(err.data.message || "Ooops, and error occured"))
+        console.log("notes response", API.defaults)
         console.log("errr ===>", err.data.message)
     })
 }

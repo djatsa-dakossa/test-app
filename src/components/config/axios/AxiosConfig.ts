@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getData } from "../../utils/storage";
 
-const host = "http://192.168.8.100:3003"
+const host = "http://192.168.100.25:3003"
 
 const API = axios.create({
     baseURL: host
